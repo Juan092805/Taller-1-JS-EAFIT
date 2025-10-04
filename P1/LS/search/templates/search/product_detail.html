@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p><strong>Precio:</strong> ${{ product.price }}</p>
+<p><strong>Categoría (texto):</strong> {{ product.category|default:"-" }}</p>
+<p><strong>Categoría (FK):</strong> {{ product.category_fk.name if product.category_fk }}{% if not product.category_fk %}-{% endif %}</p>
+<div class="d-flex gap-2">
+  <a href="{% url 'search:update' product.pk %}" class="btn btn-primary">Editar</a>
+  <a href="{% url 'search:delete' product.pk %}" class="btn btn-outline-danger">Eliminar</a>
+</div>
+{% endblock %}

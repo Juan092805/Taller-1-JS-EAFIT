@@ -1,0 +1,42 @@
+PASOS PARA ACTIVIDAD 5 + BONO
+
+1) Añadir la app 'wishlist' a INSTALLED_APPS en LS/settings.py:
+   INSTALLED_APPS = [
+     ...,
+     'landing',
+     'search',
+     'chat_recomendaciones',
+     'wishlist',   # nuevo
+   ]
+
+2) Añadir rutas en LS/urls.py:
+   from django.urls import path, include
+   urlpatterns = [
+     path('admin/', admin.site.urls),
+     path('', include('landing.urls')),
+     path('search/', include('search.urls')),
+     path('wishlist/', include('wishlist.urls')),  # nuevo
+   ]
+
+3) Aplicar migraciones:
+   python manage.py makemigrations
+   python manage.py migrate
+
+   (Esto creará las tablas Category, ProductImage, Wishlist y WishlistItem,
+    y poblará category_fk a partir del texto existente en Search.category)
+
+4) Probar CBV CRUD:
+   - Ir a /search/crud/ para listar productos.
+   - /search/crud/nuevo/ para crear, /search/crud/<id>/ para ver detalle,
+     /search/crud/<id>/editar/ y /search/crud/<id>/eliminar/
+
+5) Probar Wishlist y notificaciones:
+   - Iniciar sesión.
+   - En /search/crud/ usar ⭐ para agregar/quitar.
+   - Bajar el precio de un producto (en /admin/ o en shell) y observar la consola
+     del servidor: se imprimen notificaciones por bajada de precio.
+
+6) Plantillas:
+   - Se creó base.html dentro de search/templates para herencia.
+   - Los templates de CRUD están en search/templates/search/*.html
+   - El template de wishlist está en wishlist/templates/wishlist/list.html

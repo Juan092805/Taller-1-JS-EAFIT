@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Mis favoritos{% endblock %}
+{% block content %}
+<h1>Mis favoritos</h1>
+<ul class="list-group">
+  {% for it in items %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <a href="{% url 'search:detail' it.product.pk %}">{{ it.product.name }}</a>
+        <small class="text-muted d-block">Precio: ${{ it.product.price }}</small>
+      </div>
+      <form method="post" action="{% url 'wishlist:toggle' it.product.pk %}" onsubmit="event.preventDefault(); fetch(this.action,{method:'POST', headers:{'X-CSRFToken': '{{ csrf_token }}'}}).then(()=>location.reload())">
+        {% csrf_token %}
+        <button class="btn btn-outline-secondary">Quitar ⭐</button>
+      </form>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No tienes favoritos aún.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
