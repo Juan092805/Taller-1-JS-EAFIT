@@ -1,0 +1,34 @@
+======================================
+SETUP DEL PROYECTO – Taller 01 JS-EAFIT
+======================================
+
+
+📌 Pasos de instalación
+-----------------------
+
+1. Clonar el repositorio desde GitHub:
+   git clone https://github.com/Juan092805/Taller-1-JS-EAFIT.git
+   cd Taller-1-JS-EAFIT
+
+2. Crear un entorno virtual:
+   python -m venv .venv
+
+3. Activar el entorno virtual:
+   - En Windows:
+     .venv\Scripts\activate
+   - En Linux/Mac:
+     source .venv/bin/activate
+
+4. Instalar dependencias:
+   pip install -r requirements.txt
+
+5. Aplicar migraciones de base de datos:
+   python manage.py makemigrations
+   python manage.py migrate
+
+6. Crear superusuario (opcional, para acceder al admin):
+   python manage.py createsuperuser
+
+7. Ejecutar el servidor de desarrollo:
+   python manage.py runserver
+
