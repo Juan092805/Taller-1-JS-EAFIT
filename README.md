@@ -105,7 +105,7 @@ def confirmar_compra(request):
 ---
 ---
 
-### ✅ Actividad 5 – Patrones de Diseño en Django
+###  Actividad 5 – Patrones de Diseño en Django
 
 En esta actividad se aplicaron patrones propios de Django tanto en **Modelos** como en **Vistas**:
 
