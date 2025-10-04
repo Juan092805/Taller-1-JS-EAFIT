@@ -1,7 +1,10 @@
 #  Taller 01 – JS-EAFIT
 
 Juan Manuel Castellanos
+
 Juan Pablo Betancourt
+
+Nota importante: Profe no pudimos subir el proyecto original de Proyecto Integrador 1 entonces nos toco editarlo y subirlo directamente sin que se vean las branch.
 Proyecto base desarrollado en **Django** para el curso de Ingeniería de Software.  
 Este repositorio contiene las soluciones de las **Actividades 1 a 4** del Taller 01.
 
@@ -98,3 +101,41 @@ def confirmar_compra(request):
     servicio.enviar("Tu compra fue confirmada", request.user.username)
     return render(request, "confirmacion.html")
 ```
+---
+---
+
+### ✅ Actividad 5 – Patrones de Diseño en Django
+
+En esta actividad se aplicaron patrones propios de Django tanto en **Modelos** como en **Vistas**:
+
+- **Normalización en Modelos**:  
+  Se creó una nueva app llamada `wishlist` con los modelos `Wishlist` y `WishlistItem`, separados de `Search`.  
+  Esto permitió aplicar una estructura **normalizada** para la relación `Usuario ↔ Productos en lista de deseos`.  
+  Además, se usó `unique_together` en `WishlistItem` para evitar duplicados y mantener la integridad de los datos:contentReference[oaicite:6]{index=6}.
+
+- **Vistas basadas en clases (CBV)**:  
+  Se implementó `MyWishlistView` (basada en `ListView`) para mostrar los productos de la lista de deseos de un usuario autenticado, y `ToggleWishlistItemView` para agregar o quitar productos mediante AJAX, siguiendo el patrón CRUD con CBVs:contentReference[oaicite:7]{index=7}.
+
+- **Señales (Signals)**:  
+  Se implementó un `pre_save` en `Search` para detectar cambios de precio.  
+  Si el precio bajaba, se notificaba automáticamente a los usuarios que tenían ese producto en su wishlist, aplicando el patrón **Observer** mediante signals:contentReference[oaicite:8]{index=8}.
+
+👉 Con esto se cumplieron **dos patrones de diseño diferentes en Django**:  
+- **Normalización de modelos**.  
+- **Vistas basadas en clases (CBV)** con separación clara de responsabilidades.  
+
+---
+
+### ⭐ BONUS – Nueva funcionalidad con patrón aplicado
+
+Como funcionalidad extra, se implementó un **Wishlist con notificaciones de bajada de precio**:  
+
+- Los usuarios pueden marcar productos con una ⭐ para agregarlos o quitarlos de su lista de deseos:contentReference[oaicite:9]{index=9}.  
+- Si el precio de un producto baja (detectado con signals), se lanza una notificación al usuario usando el servicio de notificaciones basado en **Singleton** de la Actividad 4:contentReference[oaicite:10]{index=10}.  
+- Se añadieron templates dedicados (`wishlist/templates/wishlist/list.html`) y herencia de `base.html` para mantener consistencia visual:contentReference[oaicite:11]{index=11}.  
+
+👉 Decisión de diseño:  
+- Se eligió **Observer (Signals)** para escuchar cambios en productos sin acoplar la lógica directamente al modelo.  
+- Se reutilizó el **Singleton NotificacionService** como servicio centralizado, aplicando inversión de dependencias y asegurando que toda la app use un único punto de notificación.  
+
+---
