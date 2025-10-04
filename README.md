@@ -121,21 +121,21 @@ En esta actividad se aplicaron patrones propios de Django tanto en **Modelos** c
   Se implementó un `pre_save` en `Search` para detectar cambios de precio.  
   Si el precio bajaba, se notificaba automáticamente a los usuarios que tenían ese producto en su wishlist, aplicando el patrón **Observer** mediante signals:contentReference[oaicite:8]{index=8}.
 
-👉 Con esto se cumplieron **dos patrones de diseño diferentes en Django**:  
+ Con esto se cumplieron **dos patrones de diseño diferentes en Django**:  
 - **Normalización de modelos**.  
 - **Vistas basadas en clases (CBV)** con separación clara de responsabilidades.  
 
 ---
 
-### ⭐ BONUS – Nueva funcionalidad con patrón aplicado
+###  BONUS – Nueva funcionalidad con patrón aplicado
 
 Como funcionalidad extra, se implementó un **Wishlist con notificaciones de bajada de precio**:  
 
-- Los usuarios pueden marcar productos con una ⭐ para agregarlos o quitarlos de su lista de deseos:contentReference[oaicite:9]{index=9}.  
+- Los usuarios pueden marcar productos con una estrella para agregarlos o quitarlos de su lista de deseos:contentReference[oaicite:9]{index=9}.  
 - Si el precio de un producto baja (detectado con signals), se lanza una notificación al usuario usando el servicio de notificaciones basado en **Singleton** de la Actividad 4:contentReference[oaicite:10]{index=10}.  
 - Se añadieron templates dedicados (`wishlist/templates/wishlist/list.html`) y herencia de `base.html` para mantener consistencia visual:contentReference[oaicite:11]{index=11}.  
 
-👉 Decisión de diseño:  
+Decisión de diseño:  
 - Se eligió **Observer (Signals)** para escuchar cambios en productos sin acoplar la lógica directamente al modelo.  
 - Se reutilizó el **Singleton NotificacionService** como servicio centralizado, aplicando inversión de dependencias y asegurando que toda la app use un único punto de notificación.  
 
