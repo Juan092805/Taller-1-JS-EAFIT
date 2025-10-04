@@ -5,8 +5,9 @@ Juan Manuel Castellanos
 Juan Pablo Betancourt
 
 Nota importante: Profe no pudimos subir el proyecto original de Proyecto Integrador 1 entonces nos toco editarlo y subirlo directamente sin que se vean las branch.
+
 Proyecto base desarrollado en **Django** para el curso de Ingeniería de Software.  
-Este repositorio contiene las soluciones de las **Actividades 1 a 4** del Taller 01.
+Este repositorio contiene las soluciones del Taller 01.
 
 ---
 
